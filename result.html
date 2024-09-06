@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your BMI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="bg-secondary mb-5">
+    
+    <h1 id="weightStatus" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" class="fs-1 fw-bolder text-center text-light mt-5">weight status</h1>
+
+    <div class="container w-50 bg-light rounded mt-5 p-5">
+        <div class="d-flex container w-100 align-items-center justify-content-between">
+            <div class="w-50">
+                <h3 class="fs-1 text-secondary fw-bold ">Your BMI: <span id="yourBmi" class="text-warning fs-1">15</span></h3>
+            </div>
+            <div id="imgDiv" class="w-50">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 container w-100">
+        <h1 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; text-decoration: underline;" class="text-light fs-1 fw-bolder text-center pt-5">Measures To Adopt Based On Your BMI Category</h1>
+        <div id="measuresDIv" class="container-fluid mt-5 ms-5 fs-4 text-light">
+            
+            
+        </div>
+       
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+
+    const weightGet=sessionStorage.getItem("wg")
+    console.log(weightGet);
+    const heightGet=sessionStorage.getItem("hg")
+    console.log(heightGet);
+    const bmiValue=Math.floor((weightGet/((heightGet/100)**2)*10))/10
+    console.log(bmiValue);
+    yourBmi.innerHTML=bmiValue
+    
+    
+    if (bmiValue<18.5) {
+        weightStatus.innerHTML="OOPS!!! You Are Underweight!!!"
+        imgDiv.innerHTML=`
+        <img class="w-75" src="underweight.png" alt="">
+        `
+        measuresDIv.innerHTML=`
+        <li>
+                <b>Increase Caloric Intake:</b> Eat more nutrient-dense foods such as nuts, seeds, whole grains, lean proteins, and healthy fats.
+            </li>
+            <li>
+                <b>Frequent Meals:</b> Have multiple smaller meals throughout the day.
+            </li>
+            <li>
+                <b>Nutrient-Rich Foods:</b> Focus on foods rich in vitamins and minerals.
+            </li>
+            <li>
+                <b>Strength Training:</b> Engage in strength training exercises to build muscle mass.
+
+            </li>
+            <li>
+                <b>Consult a Dietitian:</b> Seek personalized advice from a nutritionist or healthcare provider to create a meal plan that meets your needs.
+
+            </li>
+        `
+    } else if (bmiValue>=18.5&&bmiValue<24.9) {
+        weightStatus.innerHTML="You Are In Normal Weight"
+        imgDiv.innerHTML=`
+        <img class="w-50" src="./normal.png" alt="">
+        `
+        measuresDIv.innerHTML=`
+        <li>
+                <b>Balanced Diet:</b> Continue eating a well-balanced diet rich in fruits, vegetables, lean proteins, and whole grains.
+            </li>
+            <li>
+                <b>Regular Exercise:</b> Engage in a mix of aerobic and strength training exercises to maintain fitness.
+            </li>
+            <li>
+                <b>Monitor Health:</b> Regular check-ups with your healthcare provider to ensure ongoing health.
+            </li>
+            <li>
+                <b>Healthy Lifestyle:</b> Maintain good sleep habits, manage stress, and avoid smoking or excessive alcohol consumption.
+
+            </li>
+        `
+    }else if (bmiValue>=25&&bmiValue<29.9) {
+        weightStatus.innerHTML="OOPS!!! You Are Overweight!!!"
+        imgDiv.innerHTML=`
+        <img class="w-75" src="./overwieight.png" alt="">
+        `
+        measuresDIv.innerHTML=`
+        <li>
+                <b>Create a Caloric Deficit:</b> Reduce calorie intake slightly and increase physical activity to promote weight loss.
+            </li>
+            <li>
+                <b>Healthy Eating:</b> Focus on whole foods, reduce intake of processed and high-sugar foods, and control portion sizes.
+            </li>
+            <li>
+                <b>Increase Physical Activity:</b> Aim for at least 150 minutes of moderate-intensity exercise or 75 minutes of high-intensity exercise per week, plus muscle-strengthening activities.
+            </li>
+            <li>
+                <b>Set Realistic Goals:</b> Aim for gradual weight loss (1–2 pounds per week) to ensure sustainable changes.
+
+            </li>
+            <li>
+                <b>Seek Support:</b> Consider working with a dietitian, personal trainer, or a support group for guidance.
+            </li>
+        `
+    }else if (bmiValue>=30) {
+        weightStatus.innerHTML="OOPS!!! You in Obesity!!!"
+        imgDiv.innerHTML=`
+        <img class="w-75" src="./obesity.png" alt="">
+        `
+        measuresDIv.innerHTML=`
+        <li>
+                <b>Consult Healthcare Providers:</b> Work with a doctor or a specialist to assess health risks and develop a personalized weight management plan.
+            </li>
+            <li>
+                <b>Structured Weight Loss Plan:</b> Implement a comprehensive plan that includes dietary changes, increased physical activity, and behavioral modifications.
+            </li>
+            <li>
+                <b>Nutritional Guidance:</b> Follow a structured eating plan designed to create a calorie deficit while ensuring balanced nutrition.
+            </li>
+            <li>
+                <b>Regular Exercise:</b> Aim for a combination of aerobic exercises (like walking, swimming, or cycling) and strength training exercises.
+
+            </li>
+            <li>
+                <b>Behavioral Therapy:</b> Consider counseling or therapy to address emotional eating or other psychological factors.
+            </li>
+            <li>
+                <b>Medical Interventions:</b> In some cases, medications or bariatric surgery may be considered, but these should be discussed thoroughly with a healthcare professional.
+            </li>
+        `
+    }
+    
+
+
+</script>
+
+</html>
